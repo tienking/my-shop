@@ -1,0 +1,72 @@
+﻿@model List<MyShop.Models.GioHang>
+
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/style.css" rel="stylesheet" />
+<div style="overflow-x:auto;">
+    @if (Model.Count() == 0)
+    {
+
+        <div style="text-align:center; margin-top:100px">
+            <img src="~/Content/images/sadpic.png" style="width:10%" />
+        </div>
+        <h2 style="text-align: center; margin-bottom: 100px; margin-top: 15px; color:#f54d56;">Chưa có sản phẩm nào</h2>
+
+    }
+    else
+    {
+        <table class="giohang" align="center">
+            <tr>
+                <th id="ha">Hình ảnh</th>
+                <th id="msp">Mã sản phẩm</th>
+                <th id="tsp">Tên sản phẩm</th>
+                <th id="g">Giá</th>
+                <th id="sl">Số lượng</th>
+                <th id="x">Xóa</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><img width="265" height="265" src="@Url.Content(item.HinhAnh)"></td>
+                    <td>@item.MaSP</td>
+                    <td>@item.Ten</td>
+                    <td>@item.Gia</td>
+                    <td>
+                        @item.SoLuong
+                        <a href="@Url.Action("AddGioHang", "GioHang", new { @MaSP = item.MaSP, @url = Request.Url.ToString() })">+</a>
+                        <a href="@Url.Action("GiamSoLuong", "GioHang", new { @MaSP = item.MaSP, @url = Request.Url.ToString() })">-</a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("XoaSanPham", "GioHang", new { @MaSP = item.MaSP, @url = Request.Url.ToString() })">Xóa</a>
+                    </td>
+                </tr>
+
+            }
+        </table>
+
+        <div align="center">
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("ThanhToan", "GioHang"))
+                {
+                    <button id="thanhtoan" type="submit" onclick="popUp()" class="btn1 btn2 btn-primary1"><span>Thanh toán</span></button>
+                    <script>
+                        function popUp() {
+                            alert("Thanh toán thành công!!!")
+                        }
+                    </script>
+                }
+            }
+            else
+            {
+                <h3>Bạn cần <a href="@Url.Action("Login", "User")" style="color:#f54d56 ">đăng nhập</a> để thanh toán</h3>
+            }
+
+        </div>
+    }
+</div>
+
+

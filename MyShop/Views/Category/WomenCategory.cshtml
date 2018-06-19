@@ -1,0 +1,10 @@
+﻿@model List<MyShop.Models.DanhMuc>
+
+<ul>
+    @foreach (var dm in Model)
+    {
+        <li><a href="@Url.Action("ListPro", new {idDM = dm.MaDM })">@dm.Ten</a></li>
+    }
+</ul>
+
+

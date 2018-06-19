@@ -1,0 +1,40 @@
+﻿@model MyShop.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="single_top">
+    <div class="container">
+        <div class="register">
+            @using (Html.BeginForm())
+            {
+                <div class="col-md-6 login-right">
+                    <h3>ĐĂNG NHẬP</h3>
+                    <form>
+                        <div>
+                            <span>Tên Đăng Nhập<label>*</label></span>
+                            @Html.TextBoxFor(model => model.UserName)
+
+                        </div>
+                        <div>
+                            <span>Mật Khẩu<label>*</label></span>
+                            @Html.TextBoxFor(model => model.Password,new {@type = "password" })
+                        </div>
+                        <a class="forgot" href="#">Quên mật khẩu?</a>
+                        <input type="submit" value="Đăng nhập">
+                        <h3>@ViewBag.Show</h3>
+                    </form>
+                </div>
+
+            }
+            <div class="col-md-6 login-left">
+                <h3>TÀI KHOẢN MỚI</h3>
+                <p>Bằng cách tạo tài khoản mới, bạn có thể mua hàng của MyShop một cách dễ dàng hơn.</p>
+                <a class="acount-btn" href="@Url.Action("Register", "User")">Tạo tài khoản mới</a>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+
